@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Reply</title>
+    <style>
+        body {
+            font-size: 10px;
+        }
+        .message {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif  ;
+        }
+
+        .user-message {
+            color: #333;
+            font-size: 10px;
+        }
+
+        .assistant-message {
+            color: #333;
+            background-color: #e8e8e8;
+            font-size: 10px;
+        }
+
+        .assistant-avatar {
+            width: 15px;
+            height: 15px;
+            border-radius: 15%;
+            margin-right: 10px;
+        }
+        #chat-container {
+            max-width: 800px; 
+            height: 300px; 
+            overflow-y: scroll; 
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        #user-input {
+            width: 300px; 
+            height: 10px; 
+            margin-left: 175px;
+            opacity: 0.6; 
+        }
+        #send-button {
+            width: 100px; 
+            height: 10px; 
+        }
+    </style>
+    <script>
+        function sendMessage(event) {
+
+                var userInput = document.getElementById("user-input").value;
+                var chatContainer = document.getElementById("chat-container");
+                
+                var wordReplies = {
+                    "hello": "Hi!",
+                    "goodbye": "See you later!",
+                    "cat": "Meow!",
+                    "":"How did your friends die?",
+                    "write me an essay":"What would you like me to write an essay on?",
+                    "how are you?":"I'm doing great!",
+                    "what is your name?":"I am ChatGPT",
+                    "call the police":"Heres an article that shows you when to call 9-1-1 in case of an emergency: https://www.canadapolice.ca/en/about/when-to-call-911.asp",
+                    "we dont have internet, can you send police to our area? please tell them that my friends are dead and that we need help":"Unfortunately, I am only an AI. Which means I am unable to send help in case of an emergency.",
+                    "they were killed, there is something in our house after us":"Have you ever considered that the murderer may be among you and your friends?",
+                };
+
+                var userMessage = document.createElement("div");
+                userMessage.className = "message user-message";
+                userMessage.innerHTML = userInput;
+                chatContainer.appendChild(userMessage);
+
+                var assistantMessage = document.createElement("div");
+                assistantMessage.className = "message assistant-message";
+
+                var assistantAvatar = document.createElement("img");
+                assistantAvatar.className = "assistant-avatar";
+                assistantAvatar.src = "file:///C:/Users/ethan/OneDrive/Desktop/ChatGPTpfp.png";
+                assistantMessage.appendChild(assistantAvatar);
+
+                if (userInput.toLowerCase() in wordReplies) {
+                    assistantMessage.innerHTML += wordReplies[userInput.toLowerCase()];
+                } else {
+                    assistantMessage.innerHTML += "Sorry, I don't have a reply for that line.";
+                }
+
+                chatContainer.appendChild(assistantMessage);
+
+                document.getElementById("user-input").value = "";
+                
+                event.preventDefault();
+
+                var userInput = document.getElementById('user-input');
+                var messageContainer = document.createElement('div');
+                var userMessage = document.createElement('div');
+
+                messageContainer.className = 'message';
+                userMessage.className = 'user-message';
+                userMessage.textContent = userInput.value;
+
+                messageContainer.appendChild(userMessage);
+                document.getElementById('chat-container').appendChild(messageContainer);
+
+                userInput.value = ''; 
+        }
+    </script>
+</head>
+<body>
+    <div id="chat-container">
+    </div>
+    <input type="text" id="user-input" placeholder="Enter your message..." onkeypress="if(event.keyCode===13) sendMessage()">
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html>
