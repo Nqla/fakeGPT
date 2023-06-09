@@ -53,10 +53,9 @@
         function sendMessage(event) {
 
                 var userInput = document.getElementById("user-input").value;
-                var chatContainer = document.getElementById("chat-container");
-              
+                var chatContainer = document.getElementById("chat-container");              
                 var wordReplies = {
-                    "hello": "Hi!",
+                    "hello": "Hi! How can I help you today?",
                     "goodbye": "See you later!",
                     "cat": "Meow!",
                     "":"How did your friends die?",
@@ -78,14 +77,26 @@
 
                 var assistantAvatar = document.createElement("img");
                 assistantAvatar.className = "assistant-avatar";
-                assistantAvatar.src = "https://raw.githubusercontent.com/Nqla/fakeGPT/main/gpt/ChatGPTpfp.png";
+                assistantAvatar.src = "file:///C:/Users/ethan/OneDrive/Desktop/gpt/ChatGPTpfp.png";
                 assistantMessage.appendChild(assistantAvatar);
 
-                if (userInput.toLowerCase() in wordReplies) {
-                    assistantMessage.innerHTML += wordReplies[userInput.toLowerCase()];
+                if (userInput.includes("dont have internet")) {
+                    assistantMessage.innerHTML += "Unfortunately, I am only an AI. Which means I am unable to send help in case of an emergency.";
+                } else if (userInput.includes("they were killed")) {
+                    assistantMessage.innerHTML += "Have you ever considered that the murderer may be among you and your friends?";
+                } else if (userInput.includes("script")) {
+                    assistantMessage.innerHTML += "Hello: Hi! How can I help you today? <br> Goodbye: See you later! <br> Write me an essay: What would you like me to write an essay on? <br> How are you?: I'm doing great! <br> What is your name?: I am ChatGPT <br> Call the police: Heres an article that shows you when to call 9-1-1 in case of an emergency: https://www.canadapolice.ca/en/about/when-to-call-911.asp <br> (Keywords: 'We dont have internet'): Unfortunately, I am only an AI. Which means I am unable to send help in case of an emergency. <br> *[Enter Key]* (Blank): How did your friends die? <br> (Keywords: 'They were killed'): Have you ever considered that the murderer may be among you and your friends?)";
                 } else {
-                    assistantMessage.innerHTML += "Sorry, I don't have a reply for that line.";
+                        if (userInput.toLowerCase() in wordReplies) {
+                        assistantMessage.innerHTML += wordReplies[userInput.toLowerCase()];
+                    } else {
+                        assistantMessage.innerHTML += "Sorry, I don't have a reply for that line.";
+                    }
                 }
+                
+
+                
+                
 
                 chatContainer.appendChild(assistantMessage);
 
