@@ -54,6 +54,7 @@
 
                 var userInput = document.getElementById("user-input").value;
                 var chatContainer = document.getElementById("chat-container");
+                var check=document.getElementById("custom").value == "test";
                 
                 var wordReplies = {
                     "hello": "Hi!",
@@ -80,6 +81,10 @@
                 assistantAvatar.className = "assistant-avatar";
                 assistantAvatar.src = "https://raw.githubusercontent.com/Nqla/fakeGPT/main/gpt/ChatGPTpfp.png";
                 assistantMessage.appendChild(assistantAvatar);
+            
+                if (userInput.toLowerCase(check)){
+                    assistantMessage.innerHTML += "test back";
+                }
 
                 if (userInput.toLowerCase() in wordReplies) {
                     assistantMessage.innerHTML += wordReplies[userInput.toLowerCase()];
